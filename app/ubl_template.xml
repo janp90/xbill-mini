@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:xbill.mini:process:basic</cbc:ProfileID>
+  <cbc:ID>{{ header.number }}</cbc:ID>
+  <cbc:IssueDate>{{ header.issue_date }}</cbc:IssueDate>
+  <cbc:DocumentCurrencyCode>{{ header.currency }}</cbc:DocumentCurrencyCode>
+
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyName><cbc:Name>{{ seller.name }}</cbc:Name></cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:CityName>{{ seller.address.city }}</cbc:CityName>
+        <cbc:PostalZone>{{ seller.address.postcode }}</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>{{ seller.address.country_code }}</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:Contact>
+        <cbc:Name>{{ seller.contact.person }}</cbc:Name>
+        <cbc:Telephone>{{ seller.contact.phone }}</cbc:Telephone>
+        <cbc:ElectronicMail>{{ seller.contact.email }}</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyName><cbc:Name>{{ buyer.name }}</cbc:Name></cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:CityName>{{ buyer.address.city }}</cbc:CityName>
+        <cbc:PostalZone>{{ buyer.address.postcode }}</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>{{ buyer.address.country_code }}</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      {% if buyer.reference %}
+      <cac:Contact><cbc:ID>{{ buyer.reference }}</cbc:ID></cac:Contact>
+      {% endif %}
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+
+  {% for line in lines %}
+  <cac:InvoiceLine>
+    <cbc:ID>{{ line.id }}</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="{{ line.unit_code }}">{{ "%.2f"|format(line.qty) }}</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="{{ header.currency }}">{{ "%.2f"|format(line.qty * line.net_unit_price) }}</cbc:LineExtensionAmount>
+    <cac:Item><cbc:Name>{{ line.name }}</cbc:Name></cac:Item>
+    <cac:Price><cbc:PriceAmount currencyID="{{ header.currency }}">{{ "%.2f"|format(line.net_unit_price) }}</cbc:PriceAmount></cac:Price>
+  </cac:InvoiceLine>
+  {% endfor %}
+
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="{{ header.currency }}">{{ totals.net }}</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="{{ header.currency }}">{{ totals.net }}</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="{{ header.currency }}">{{ totals.gross }}</cbc:TaxInclusiveAmount>
+    <cbc:PayableAmount currencyID="{{ header.currency }}">{{ totals.gross }}</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+</Invoice>
+
