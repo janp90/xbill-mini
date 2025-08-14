@@ -82,6 +82,12 @@
       </div>
     </section>
 
+    <!-- Feedback -->
+    <section class="card" id="feedback" style="display:none">
+      <div id="errors" class="alert error" style="display:none"></div>
+      <div id="warnings" class="alert warn" style="display:none"></div>
+    </section>
+
     <!-- Aktionen -->
     <section class="actions">
       <button id="btnValidate" class="primary">Nur prüfen</button>
@@ -97,9 +103,11 @@
       <button id="btnEmail">Export per E-Mail senden</button>
     </section>
 
-    <!-- Output -->
     <section id="out" class="out"></section>
   </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="spinner" class="spinner" hidden></div>
 
   <footer class="footer">
     <small>v0.1 • local only • <a href="/docs" target="_blank">API Docs</a></small>
@@ -108,4 +116,3 @@
   <script src="/static/app.js"></script>
 </body>
 </html>
-
