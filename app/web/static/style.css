@@ -11,7 +11,13 @@ body{margin:0;font-family:ui-sans-serif,system-ui,Inter,Arial;color:var(--ink);b
 .container{max-width:var(--max);margin:16px auto;padding:0 16px}
 .card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;background:#fff}
 .label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}
-.seg label{margin-right:12px}
+
+/* NEW: Segmented Toggle */
+.seg-toggle{display:flex;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:4px}
+.seg-item{flex:1;border:none;background:transparent;padding:10px 12px;border-radius:calc(var(--radius) - 6px);color:var(--muted);font-weight:600;cursor:pointer}
+.seg-item:hover{background:#f4f6ff}
+.seg-item.active{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04),0 0 0 1px #eef2ff inset;color:var(--ink)}
+
 .hint{color:var(--muted);font-size:12px;margin-top:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:640px){.grid{grid-template-columns:1fr}}
@@ -36,7 +42,7 @@ button[disabled]{opacity:.6;cursor:not-allowed}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:999px;opacity:0;transition:opacity .2s, transform .2s;pointer-events:none;z-index:3}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 .spinner{position:fixed;inset:0;background:rgba(255,255,255,.5);display:grid;place-items:center;z-index:4}
-.spinner[hidden]{display:none !important;}  /* wichtig: 'hidden' wirklich ausblenden */
+.spinner[hidden]{display:none !important;}
 .spinner::after{content:"";width:36px;height:36px;border:4px solid #ddd;border-top-color:var(--brand);border-radius:50%;animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 

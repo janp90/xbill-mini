@@ -15,9 +15,9 @@
     <!-- Mode -->
     <section class="card">
       <label class="label">Modus</label>
-      <div class="seg">
-        <label><input type="radio" name="mode" value="B2B" checked> B2B</label>
-        <label><input type="radio" name="mode" value="B2G"> B2G (Behörde)</label>
+      <div class="seg-toggle" id="modeToggle">
+        <button id="modeB2G" type="button" class="seg-item">Behörde (B2G)</button>
+        <button id="modeB2B" type="button" class="seg-item active">Unternehmen (B2B)</button>
       </div>
       <p class="hint" id="b2gHint" hidden>Bei B2G ist die <strong>Leitweg-ID</strong> Pflicht.</p>
     </section>
