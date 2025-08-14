@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XBill Mini</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="appbar">
+    <h1>XBill Mini</h1>
+  </header>
+
+  <main class="container">
+    <!-- Mode -->
+    <section class="card">
+      <label class="label">Modus</label>
+      <div class="seg">
+        <label><input type="radio" name="mode" value="B2B" checked> B2B</label>
+        <label><input type="radio" name="mode" value="B2G"> B2G (Behörde)</label>
+      </div>
+      <p class="hint" id="b2gHint" hidden>Bei B2G ist die <strong>Leitweg-ID</strong> Pflicht.</p>
+    </section>
+
+    <!-- Rechnung -->
+    <section class="card">
+      <h2>Rechnung</h2>
+      <div class="grid">
+        <label>Rechnungsnummer
+          <input id="number" placeholder="2025-001" />
+        </label>
+        <label>Datum
+          <input id="issue_date" type="date" />
+        </label>
+        <label>Währung
+          <input id="currency" value="EUR" disabled />
+        </label>
+      </div>
+    </section>
+
+    <!-- Verkäufer -->
+    <section class="card">
+      <h2>Verkäufer (du)</h2>
+      <div class="grid">
+        <label>Name <input id="seller_name" placeholder="Studio Presche" /></label>
+        <label>USt-ID (optional) <input id="seller_vat" placeholder="DE123456789" /></label>
+        <label>Stadt <input id="seller_city" placeholder="Augsburg" /></label>
+        <label>PLZ <input id="seller_postcode" placeholder="86150" /></label>
+        <label>Land (ISO) <input id="seller_country" placeholder="DE" /></label>
+        <label>Kontakt-Person <input id="seller_person" placeholder="Jan Presche" /></label>
+        <label>Telefon <input id="seller_phone" placeholder="+49 123" /></label>
+        <label>E-Mail <input id="seller_email" type="email" placeholder="hi@example.com" /></label>
+      </div>
+    </section>
+
+    <!-- Käufer -->
+    <section class="card">
+      <h2>Käufer</h2>
+      <div class="grid">
+        <label>Name <input id="buyer_name" placeholder="Muster GmbH" /></label>
+        <label>Stadt <input id="buyer_city" placeholder="München" /></label>
+        <label>PLZ <input id="buyer_postcode" placeholder="80331" /></label>
+        <label>Land (ISO) <input id="buyer_country" placeholder="DE" /></label>
+        <label id="lwLabel" hidden>Leitweg-ID (nur B2G) <input id="buyer_reference" placeholder="12345-67890-..." /></label>
+      </div>
+    </section>
+
+    <!-- Positionen -->
+    <section class="card">
+      <h2>Positionen</h2>
+      <div id="lines"></div>
+      <button class="ghost" id="addLine">+ Position hinzufügen</button>
+      <div class="totals" id="totals">Netto €0,00 • USt €0,00 • Brutto €0,00</div>
+    </section>
+
+    <!-- Zahlung -->
+    <section class="card">
+      <h2>Zahlung</h2>
+      <div class="grid">
+        <label>IBAN <input id="iban" placeholder="DE89370400440532013000" /></label>
+        <label>Verwendungszweck (optional) <input id="remittance" placeholder="Re 2025-001" /></label>
+      </div>
+    </section>
+
+    <!-- Aktionen -->
+    <section class="actions">
+      <button id="btnValidate" class="primary">Nur prüfen</button>
+      <button id="btnExport">XML+PDF herunterladen</button>
+    </section>
+
+    <section class="card">
+      <h2>Per E-Mail senden (MailHog)</h2>
+      <div class="grid">
+        <label>Empfänger <input id="email_to" placeholder="test@example.com" /></label>
+        <label>Absender <input id="email_from" placeholder="me@example.com" /></label>
+      </div>
+      <button id="btnEmail">Export per E-Mail senden</button>
+    </section>
+
+    <!-- Output -->
+    <section id="out" class="out"></section>
+  </main>
+
+  <footer class="footer">
+    <small>v0.1 • local only • <a href="/docs" target="_blank">API Docs</a></small>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
