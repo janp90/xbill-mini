@@ -12,7 +12,7 @@ body{margin:0;font-family:ui-sans-serif,system-ui,Inter,Arial;color:var(--ink);b
 .card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;background:#fff}
 .label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px}
 
-/* NEW: Segmented Toggle */
+/* Segmented Toggle */
 .seg-toggle{display:flex;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:4px}
 .seg-item{flex:1;border:none;background:transparent;padding:10px 12px;border-radius:calc(var(--radius) - 6px);color:var(--muted);font-weight:600;cursor:pointer}
 .seg-item:hover{background:#f4f6ff}
@@ -23,7 +23,7 @@ body{margin:0;font-family:ui-sans-serif,system-ui,Inter,Arial;color:var(--ink);b
 @media (max-width:640px){.grid{grid-template-columns:1fr}}
 h2{font-size:14px;margin:0 0 8px 0}
 input,select,button{font:inherit}
-input,select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px}
+input,select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;outline:none}
 button{padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:#fff;cursor:pointer}
 button.primary{border-color:var(--brand);color:var(--brand);font-weight:600}
 button.ghost{background:#F8FAFF}
@@ -34,11 +34,18 @@ button[disabled]{opacity:.6;cursor:not-allowed}
 .totals{margin-top:8px;font-weight:600}
 .out{white-space:pre-wrap;border:1px dashed var(--border);border-radius:10px;padding:10px;color:#111;background:#FCFCFE}
 
+/* Feedback-Karten */
 .alert{padding:12px;border-radius:10px;margin:8px 0}
 .alert.error{border:1px solid #FECACA;background:#FEF2F2;color:var(--err)}
 .alert.warn{border:1px solid #FDE68A;background:#FFFBEB;color:var(--warn)}
 .alert ul{margin:6px 0 0 18px}
 
+/* Feld-Fehler-Stil (neu) */
+.invalid{border-color: var(--err) !important; box-shadow: 0 0 0 3px rgba(220,38,38,.08)}
+.field-msg{color:var(--err);font-size:12px;margin-top:4px}
+.field-warn{color:var(--warn);font-size:12px;margin-top:4px}
+
+/* Toast & Spinner */
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:999px;opacity:0;transition:opacity .2s, transform .2s;pointer-events:none;z-index:3}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 .spinner{position:fixed;inset:0;background:rgba(255,255,255,.5);display:grid;place-items:center;z-index:4}
